@@ -1,0 +1,16 @@
+Contact Tracing 
+Summary:
+ COVID has crippled economies world over. Contact Tracing is a key tool and this project is aimed at providing a way for 
+ governments and private business to implement contact tracing.
+ 
+ What is Contact Tracing?
+A person might have COVID and he may be asymptomatic , in the meanwhile he might be spreading the disease without his/her knowledge. 
+
+How can the asymptomatic person spread ?
+He/She might have gone to grocery/ restaurant (even with social distancing)  to shop and virus might spread on the surfaces .
+The surfaces are then agents for the virus to spread around and infect more people.
+
+Once a person is identified as COVID positive, a system is needed to go back in time (may be 2 weeks from the positive identification ) and identify all the common places which he visited.
+
+Identifing and contacing people who might have been exposed is a critical part of controlling the spread.
+The potential person needs to be isolated and tested. Further this person needs to quarantine as well.
