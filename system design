@@ -1,0 +1,39 @@
+The goal of contact tracing is to enable governments and business track customers. 
+For the customers it is a way to get informed if there were in contact with a COVID infected person.
+
+Customers need not give their phone numbers, we can use in-app messaging to send notification.
+It is recommended but not needed.
+
+Requirements:
+
+	A) The system must be scalable to millions of users
+	B) System must be reliable and 
+	C) System must be able to filter visitors to a shops visited.
+	
+	Assumptions : All the users and retail shops/restaurants  are expected to have a Mobile device.
+	
+Contact Tracing is a streaming application -  key core scenarios are
+
+	i) User Registration - All the users registered will be stored in Kafka.
+			             Unique GUID will be assigned to the user/app.
+				  A QR code will be generated for the user to scan.
+
+    ii)  Shops Registration -
+                The shops are required to give their business name and location , a unique shopid will be assgined.
+
+
+   iii) User/Shop visit -
+           The users scan the QR Code at the entrance - (A UserCheckIN event is generated)
+           When the user checkout of shop he scans again (A UserCheckOut even is generated)
+
+ iv) User Covid +ve -
+     The hospital identifies COVID user, they trigger a CONTACT NOTIFCATION -
+
+      This triggers a search for all the Shops the user visited in the last  2 week and extract the time visited by the Patient..
+      For each of these visited places the system further maps all the users that visited the place in the time window..
+
+    For each of this shoppers, the system then sends a notification via in-app or via text that they need to further check and quarantine if need be.
+
+
+
+For all of these scenarios we can use Kafka as our backend.
