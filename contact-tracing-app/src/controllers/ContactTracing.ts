@@ -14,10 +14,9 @@ export const createContactTracing: RequestHandler = (req, res, next) => {
 
   
   const postEvent = () => {
-    console.log("in the breeds");
     try {
       return Axios.post('http://localhost:8088/ksql',{
-        "ksql": "LIST STREAMS;",
+        "ksql": "INSERT INTO riderLocations (profileId, latitude, longitude) VALUES ('c2309eec', 37.7877, -122.4205);",
         "streamsProperties": {}
       })
     } catch (error) {
@@ -26,7 +25,7 @@ export const createContactTracing: RequestHandler = (req, res, next) => {
   }
   
   const postEvents = async () => {
-    const breeds = postEvent()!
+    const event = postEvent()!
       .then(response => {
          console.log(response.data);
       })
