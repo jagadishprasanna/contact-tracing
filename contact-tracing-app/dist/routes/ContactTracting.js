@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const ContactTracing_1 = require("../controllers/ContactTracing");
+const router = express_1.Router();
+router.post('/', ContactTracing_1.createContactTracing);
+router.get('/', ContactTracing_1.getContactTracing);
+router.patch('/:id', ContactTracing_1.updateContactTracing);
+//router.delete('/:id', deleteTodo);
+exports.default = router;
