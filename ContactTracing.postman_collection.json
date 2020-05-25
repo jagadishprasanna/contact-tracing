@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "26ac72e2-20af-4ee5-93ce-5b2546d8f13e",
+		"name": "ContactTracing",
+		"description": "ContactTracing is a opensource project to help governements implement a end-end contact tracing with regards to congtagious diseses.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Register Stream",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Charset",
+						"value": "utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"ksql\": \"LIST STREAMS;\",\n  \"streamsProperties\": {}\n}",
+					"options": {}
+				},
+				"url": {
+					"raw": "http://localhost:8088/ksql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"ksql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Drop Register Stream",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Charset",
+						"value": "utf-8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"ksql\": \"DROP STREAM CONTACT_TRACING;\",\n  \"streamsProperties\": {}\n}\n",
+					"options": {}
+				},
+				"url": {
+					"raw": "http://localhost:8088/ksql",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8088",
+					"path": [
+						"ksql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/ContactTracing",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/ContactTracing",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ContactTracing"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
