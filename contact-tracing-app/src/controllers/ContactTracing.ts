@@ -5,9 +5,13 @@ import Axios from 'axios';
 import "reflect-metadata";
 import { Service } from ".././service";
 import DIContainer from ".././di-container";
+import { EventSink } from "../Implementations/EventSource";
+import { IEventSink } from "../Interfaces/IEventSource";
+
 
 const service: Service = DIContainer.resolve<Service>(Service);
 
+const eventSink: EventSink.EventSource = DIContainer.resolve<IEventSink.IEventSource>(EventSink.EventSource);
 
 
 const CONTACT_TRACING: ContactTracing[] = [];
@@ -20,7 +24,7 @@ export const createContactTracing: RequestHandler = (req, res, next) => {
   CONTACT_TRACING.push(newEvent);
 
   
-  const postEvent = () => {
+  /*const postEvent = () => {
     try {
       return Axios.post('http://localhost:8088/ksql',{
         "ksql": "INSERT INTO riderLocations (profileId, latitude, longitude) VALUES ('c2309eec', 37.7877, -122.4205);",
@@ -41,15 +45,19 @@ export const createContactTracing: RequestHandler = (req, res, next) => {
         throw error;
       })
   }
-
+ 
   postEvents();
+  */
+  console.log(eventSink.recordEvent());
+  
   res.status(201).json({ message: 'Created the todo.', createdTodo: newEvent });
 };
 
 export const getContactTracing: RequestHandler = (req, res, next) => {
   res.json({ todos: CONTACT_TRACING });
   console.log(service.getAllNames());
-
+  //console.log(eventSink.recordEvent());
+  
 };
 
 export const updateContactTracing: RequestHandler<{ id: string }> = (req, res, next) => {
