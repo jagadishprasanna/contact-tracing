@@ -2,6 +2,13 @@ import { RequestHandler } from 'express';
 import { KafkaClient as Client, Producer, ProduceRequest } from 'kafka-node';
 import { Events as ContactTracing, Events } from '../models/Events';
 import Axios from 'axios';
+import "reflect-metadata";
+import { Service } from ".././service";
+import DIContainer from ".././di-container";
+
+const service: Service = DIContainer.resolve<Service>(Service);
+
+
 
 const CONTACT_TRACING: ContactTracing[] = [];
 const kafkaHost = 'localhost:9092';
@@ -41,6 +48,8 @@ export const createContactTracing: RequestHandler = (req, res, next) => {
 
 export const getContactTracing: RequestHandler = (req, res, next) => {
   res.json({ todos: CONTACT_TRACING });
+  console.log(service.getAllNames());
+
 };
 
 export const updateContactTracing: RequestHandler<{ id: string }> = (req, res, next) => {
