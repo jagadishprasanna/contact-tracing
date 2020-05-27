@@ -1,12 +1,11 @@
 import { RequestHandler } from 'express';
-import { KafkaClient as Client, Producer, ProduceRequest } from 'kafka-node';
 import { Events as ContactTracing, Events } from '../models/Events';
-import Axios from 'axios';
 import "reflect-metadata";
 import { Service } from ".././service";
 import DIContainer from ".././di-container";
 import { EventSink } from "../Implementations/EventSource";
 import { IEventSink } from "../Interfaces/IEventSource";
+import {plainToClass} from "class-transformer";
 
 
 const service: Service = DIContainer.resolve<Service>(Service);
@@ -14,47 +13,17 @@ const service: Service = DIContainer.resolve<Service>(Service);
 const eventSink: EventSink.EventSource = DIContainer.resolve<IEventSink.IEventSource>(EventSink.EventSource);
 
 
-const CONTACT_TRACING: ContactTracing[] = [];
-const kafkaHost = 'localhost:9092';
 
 export const createContactTracing: RequestHandler = (req, res, next) => {
-  const text = (req.body as { text: string }).text;
-  const newEvent = new ContactTracing(Math.random().toString(), text, new Date());
-
-  CONTACT_TRACING.push(newEvent);
-
-  
-  /*const postEvent = () => {
-    try {
-      return Axios.post('http://localhost:8088/ksql',{
-        "ksql": "INSERT INTO riderLocations (profileId, latitude, longitude) VALUES ('c2309eec', 37.7877, -122.4205);",
-        "streamsProperties": {}
-      })
-    } catch (error) {
-      console.error(error)
-    }
-  }
-  
-  const postEvents = async () => {
-    const event = postEvent()!
-      .then(response => {
-         console.log(response.data);
-      })
-      .catch(error => {
-        console.log(error)
-        throw error;
-      })
-  }
  
-  postEvents();
-  */
-  console.log(eventSink.recordEvent());
+  let event = plainToClass(IEventSink.eventData, req.body as IEventSink.eventData);
+  eventSink.recordEvent(event);
   
-  res.status(201).json({ message: 'Created the todo.', createdTodo: newEvent });
+  
+  res.status(201).json({ message: 'Created the event.'});
 };
 
 export const getContactTracing: RequestHandler = (req, res, next) => {
-  res.json({ todos: CONTACT_TRACING });
   console.log(service.getAllNames());
   //console.log(eventSink.recordEvent());
   
@@ -65,15 +34,6 @@ export const updateContactTracing: RequestHandler<{ id: string }> = (req, res, n
 
   const updatedText = (req.body as { text: string }).text;
 
-  const event = CONTACT_TRACING.findIndex(todo => todo.eventID === eventID);
-
-  if (event < 0) {
-    throw new Error('Could not find todo!');
-  }
-
-  CONTACT_TRACING[event] = new ContactTracing(CONTACT_TRACING[event].eventID, updatedText,new Date());
-
-  res.json({ message: 'Updated!', updatedTodo: CONTACT_TRACING[event] });
 };
 
 /*

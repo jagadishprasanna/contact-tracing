@@ -7,4 +7,4 @@ import { IEventSink } from "./Interfaces/IEventSource";
 const service: Service = DIContainer.resolve<Service>(Service);
 const eventSink: EventSink.EventSource = DIContainer.resolve<IEventSink.IEventSource>(EventSink.EventSource);
 console.log(service.getAllNames());
-console.log(eventSink.recordEvent());
+//console.log(eventSink.recordEvent());

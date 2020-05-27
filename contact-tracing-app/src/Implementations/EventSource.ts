@@ -1,20 +1,30 @@
 import { injectable } from "inversify";
 import { IEventSink } from "../Interfaces/IEventSource";
+import * as eventData from "../Interfaces/IEventSource";
 import Axios from 'axios';
 import "reflect-metadata";
-
+import * as _ from "lodash";
+import { String, StringBuilder } from 'typescript-string-operations';
 
 export module EventSink{
+
+  
+
   @injectable()
   export class EventSource implements IEventSink.IEventSource {
+  
     name: string = "eventRecorded";
+   // evt: IEventSink.eventData;
+   
+    public recordEvent(event: IEventSink.eventData): any {
 
-    public recordEvent(): any {
       
+      let val = String.Format("INSERT INTO riderLocations (profileId, latitude, longitude) VALUES ('{0}', {1}, {2});", event.profileid,event.latitude,event.longitude);
+      console.log(val);
       const postEvent = () => {
         try {
           return Axios.post('http://localhost:8088/ksql',{
-            "ksql": "INSERT INTO riderLocations (profileId, latitude, longitude) VALUES ('c2309eec', 37.7877, -122.4205);",
+            "ksql": val,
             "streamsProperties": {}
           })
           .then(function (response) {
