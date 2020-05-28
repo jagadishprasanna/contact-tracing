@@ -18,8 +18,7 @@ export module EventSink{
    
     public recordEvent(event: IEventSink.eventData): any {
 
-      
-      let val = String.Format("INSERT INTO riderLocations (profileId, latitude, longitude) VALUES ('{0}', {1}, {2});", event.profileid,event.latitude,event.longitude);
+      let val = String.Format("INSERT INTO eventLog (eventID, userID, placeID, eventTime) VALUES ('{0}', '{1}', '{2}','{3}');", event.eventID,event.userID,event.placeID,event.eventTime);
       console.log(val);
       const postEvent = () => {
         try {
@@ -28,10 +27,10 @@ export module EventSink{
             "streamsProperties": {}
           })
           .then(function (response) {
-            console.log(response);
+            console.log(response.status);
           })
         } catch (error) {
-          console.error(error)
+          console.error(error);
         }
       }
       

@@ -2,16 +2,16 @@ export module IEventSink {
   
   export class eventData 
   {
-      profileid: string = "";
-      latitude: number = 0.0;
-      longitude: number = 0.0;
+      eventID: string = ""
+      userID: string = "";
+      placeID: string = "";
+      eventTime: string =  Date.now().toString();
 
-      constructor(profid:string, long:number, lat:number)
+      constructor(evtid:string, userid: string, placeid: string)
       {
-        this.profileid = profid;
-        this.latitude = lat;
-        this.longitude = long;
-
+        this.eventID = evtid;
+        this.userID = userid;
+        this.placeID = placeid;
       }
   }
 

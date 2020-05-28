@@ -13,20 +13,16 @@ const service: Service = DIContainer.resolve<Service>(Service);
 const eventSink: EventSink.EventSource = DIContainer.resolve<IEventSink.IEventSource>(EventSink.EventSource);
 
 
-
 export const createContactTracing: RequestHandler = (req, res, next) => {
- 
+
   let event = plainToClass(IEventSink.eventData, req.body as IEventSink.eventData);
   eventSink.recordEvent(event);
-  
-  
   res.status(201).json({ message: 'Created the event.'});
+
 };
 
 export const getContactTracing: RequestHandler = (req, res, next) => {
   console.log(service.getAllNames());
-  //console.log(eventSink.recordEvent());
-  
 };
 
 export const updateContactTracing: RequestHandler<{ id: string }> = (req, res, next) => {

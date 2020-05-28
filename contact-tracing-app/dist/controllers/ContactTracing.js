@@ -14,13 +14,11 @@ var service = di_container_1.default.resolve(service_1.Service);
 var eventSink = di_container_1.default.resolve(EventSource_1.EventSink.EventSource);
 exports.createContactTracing = function (req, res, next) {
     var event = class_transformer_1.plainToClass(IEventSource_1.IEventSink.eventData, req.body);
-    console.log("event string" + JSON.stringify(event));
-    console.log(eventSink.recordEvent(event));
+    eventSink.recordEvent(event);
     res.status(201).json({ message: 'Created the event.' });
 };
 exports.getContactTracing = function (req, res, next) {
     console.log(service.getAllNames());
-    //console.log(eventSink.recordEvent());
 };
 exports.updateContactTracing = function (req, res, next) {
     var eventID = req.params.id;
