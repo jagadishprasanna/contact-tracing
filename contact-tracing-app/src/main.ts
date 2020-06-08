@@ -7,6 +7,7 @@ import { IEventSink } from "./Interfaces/IEventSource";
 import { resolve } from "path";
 
 import { config } from "dotenv";
+import "./lib/env";
 
 
 const service: Service = DIContainer.resolve<Service>(Service);
@@ -15,7 +16,6 @@ console.log(service.getAllNames());
 //console.log(eventSink.recordEvent());
 
 
-import "./lib/env"
 
 console.log(`Current NODE_ENV is ${process.env.NODE_ENV}`)
 

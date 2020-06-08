@@ -5,7 +5,7 @@ export module IEventSink {
       eventID: string = ""
       userID: string = "";
       placeID: string = "";
-      eventTime: string =  Date.now().toString();
+      eventTime: string =  new Date().toLocaleString();
 
       constructor(evtid:string, userid: string, placeid: string)
       {

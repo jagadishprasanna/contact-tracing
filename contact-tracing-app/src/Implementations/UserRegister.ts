@@ -1,30 +1,24 @@
 import { injectable } from "inversify";
-import { IEventSink } from "../Interfaces/IEventSource";
+import * as eventData from "../Interfaces/IEventSource";
+import config from "config";
 import Axios from 'axios';
 import "reflect-metadata";
 import * as _ from "lodash";
 import { String, StringBuilder } from 'typescript-string-operations';
 import "../lib/env";
+import { IUser }  from "../Interfaces/IUserRegister";
 
-export module EventSink{
 
-  
+export module User{
 
   @injectable()
-  export class EventSource implements IEventSink.IEventSource {
+  export class UserRegister implements IUser.IUserRegister {
    
-    
-    name: string = "eventRecorded";
-    
-    public recordEvent(event: IEventSink.eventData): any {
-
-      console.log(`Current NODE_ENV is ${process.env.NODE_ENV}`)
-
-      console.log(`Sample key is ${process.env.SAMPLE_KEY}`)
-
+    registerUser(user: IUser.UserData): any {
+      console.log("In the registerUser..");
       var kafka_source  = process.env.KAFKA_SOURCE!;
       console.log(kafka_source);
-      let val = String.Format("INSERT INTO eventLog (eventID, userID, placeID, eventTime) VALUES ('{0}', '{1}', '{2}','{3}');", event.eventID,event.userID,event.placeID,event.eventTime);
+      let val = String.Format("INSERT INTO USERS (userID, phoneNumber, emailID) VALUES ('{0}', '{1}', '{2}');", user.userID, user.phoneNumber, user.emailID);
       console.log(val);
       const postEvent = () => {
         try {
@@ -49,7 +43,9 @@ export module EventSink{
       }
      
       postEvents();
-      //return this.name;
+    }
+    
+    
     }
   }
-}
+
