@@ -1,8 +1,8 @@
 import { RequestHandler } from 'express';
 import { Events as ContactTracing, Events } from '../models/Events';
 import "reflect-metadata";
-import { Service } from ".././service";
-import DIContainer from ".././di-container";
+import { Service } from "../service";
+import DIContainer from "../di-container";
 import { EventSink } from "../Implementations/EventSource";
 import { IEventSink } from "../Interfaces/IEventSource";
 import {plainToClass} from "class-transformer";

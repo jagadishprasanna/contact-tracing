@@ -2,8 +2,8 @@ import { RequestHandler } from 'express';
 
 import { Todo } from '../models/todo';
 import "reflect-metadata";
-import { Service } from ".././service";
-import DIContainer from ".././di-container";
+import { Service } from "../service";
+import DIContainer from "../di-container";
 import { User } from "../Implementations/UserRegister";
 import { IUser } from "../Interfaces/IUserRegister";
 import {plainToClass} from "class-transformer";
