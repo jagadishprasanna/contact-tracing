@@ -35,7 +35,7 @@
     "kafka-node": "^5.0.0",
     "lodash": "^4.17.15",
     "node-config-ts": "^3.0.4",
-    "qs": "^6.9.4",
+    "qs": "^6.9.7",
     "reflect-metadata": "^0.1.13",
     "request": "^2.88.2",
     "ts-jest": "^25.5.0",
